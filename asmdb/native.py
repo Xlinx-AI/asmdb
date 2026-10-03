@@ -50,6 +50,10 @@ def _candidate_names() -> list[str]:
     bits = ctypes.sizeof(ctypes.c_void_p) * 8
     feats = _cpu_features()
     force = os.getenv("ASMDB_BACKEND", "").strip().lower()
+    if machine in {"arm64", "aarch64"} and bits == 64:
+        if force and force != "arm64_neon":
+            raise ValueError("ARM64 requires the arm64_neon backend")
+        return ["arm64_neon"]
     if bits == 32 or machine in {"i386", "i486", "i586", "i686", "x86"}:
         if force and force != "x86":
             raise ValueError("A 32-bit process requires the x86 backend")

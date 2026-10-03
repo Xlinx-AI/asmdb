@@ -1,6 +1,12 @@
 BITS 64
 default rel
+%ifidn __OUTPUT_FORMAT__,macho64
+section __TEXT,__const
+%elifidn __OUTPUT_FORMAT__,win64
 section .rdata
+%else
+section .rodata
+%endif
 local_size: dq 64
 section .text
 %ifidn __OUTPUT_FORMAT__,win64
@@ -21,7 +27,12 @@ asmdb_cl_enqueue:
     add rsp, 72
     ret
 %else
+%ifidn __OUTPUT_FORMAT__,macho64
+%define asmdb_cl_enqueue _asmdb_cl_enqueue
+global asmdb_cl_enqueue
+%else
 global asmdb_cl_enqueue:function
+%endif
 asmdb_cl_enqueue:
     mov rax, rcx
     mov r8, rdx
@@ -36,5 +47,7 @@ asmdb_cl_enqueue:
     call rax
     add rsp, 24
     ret
+%ifidn __OUTPUT_FORMAT__,elf64
 section .note.GNU-stack noalloc noexec nowrite progbits
+%endif
 %endif

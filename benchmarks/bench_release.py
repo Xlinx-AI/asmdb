@@ -73,10 +73,9 @@ def main():
                 got = scorer.score(matrix, query)
                 np.testing.assert_allclose(got, reference, atol=8e-5, rtol=8e-5)
                 result = {
-                    "backend": "opencl_nasm",
+                    "backend": "opencl_assembly",
                     "device": device.name,
-                    "capability": f"{device.compute_capability_major_nv}.{device.compute_capability_minor_nv}",
-                    "pci_bus": device.pci_bus_id_nv,
+                    "opencl_version": device.version,
                     "rows": rows,
                     "max_abs_error": float(np.max(np.abs(got - reference))),
                 }

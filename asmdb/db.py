@@ -268,7 +268,7 @@ class ASMDB:
                 "backend": "opencl",
                 "native": True,
                 "device": self._gpu.device.name,
-                "dispatch": "NASM",
+                "dispatch": "native assembly",
                 "kernel": "OpenCL C 1.2",
             }
         b = backend_info()

@@ -48,7 +48,7 @@ class GPUScorer:
         library = next((p for p in _lib_paths("opencl") if p.is_file()), None)
         if library is None:
             raise RuntimeError(
-                "NASM OpenCL dispatch library is missing; run tools/build_native.py"
+                "Native OpenCL dispatch library is missing; run tools/build_native.py"
             )
         self._bridge = ctypes.CDLL(str(library))
         self._enqueue = self._bridge.asmdb_cl_enqueue
@@ -111,7 +111,7 @@ class GPUScorer:
                 self._function,
             )
             if status:
-                raise RuntimeError(f"OpenCL NASM enqueue failed: {status}")
+                raise RuntimeError(f"OpenCL native enqueue failed: {status}")
             output = np.empty(rows, dtype=np.float32)
             cl.enqueue_copy(self.queue, output, self._output, is_blocking=True)
             return output

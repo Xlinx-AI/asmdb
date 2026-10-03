@@ -15,7 +15,12 @@ global asmdb_scores
     ret
 %endmacro
 %else
+%ifidn __OUTPUT_FORMAT__,macho64
+%define asmdb_scores _asmdb_scores
+global asmdb_scores
+%else
 global asmdb_scores:function
+%endif
 %macro ENTER_SCORES 0
 %endmacro
 %macro LEAVE_SCORES 0

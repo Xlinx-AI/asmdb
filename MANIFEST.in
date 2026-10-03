@@ -1,7 +1,9 @@
 include README.md
+include LICENSE
 include STATUS.md
 recursive-include docs *.md
 recursive-include native *.asm *.inc *.S
 recursive-include tools *.py
 recursive-include asmdb/kernels *.cl
 recursive-include asmdb/_native *.dll *.so
+recursive-include asmdb/_native *.dylib

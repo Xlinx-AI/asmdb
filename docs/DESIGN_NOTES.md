@@ -9,7 +9,9 @@ provides the OS-aware feature gate. A short calibration chooses between supporte
 variants. Explicit unsupported selections raise an error before kernel execution.
 
 The NASM ABI include maps Win64 argument registers into the scorer register layout
-and preserves nonvolatile registers. Linux uses SysV argument registers directly.
+and preserves nonvolatile registers. Linux and Intel macOS use SysV argument
+registers directly. Mach-O exports use the C symbol prefix. ARM64 uses AAPCS64
+argument registers and a four-lane NEON accumulation with scalar tails.
 The OpenCL NASM bridge supplies the launch dimensions and calls the runtime function
 pointer. Allocation, device lifetime and error handling remain in the Python wrapper.
 

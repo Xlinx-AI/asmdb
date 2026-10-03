@@ -25,3 +25,9 @@ certification or compatibility with every advertised GPU generation.
 
 Older benchmark logs, binaries and PROJECT_SHA256SUMS.txt describe the original
 0.1 archive. Release checksums are recorded separately in dist/SHA256SUMS.txt.
+
+Subsequent source changes add Mach-O libraries for Intel macOS, ARM64 NEON and
+OpenCL dispatch for Linux/Apple Silicon, automatic native compilation during wheel
+creation, and the five-platform publishing workflow. These changes have not been
+built or executed locally. The earlier Windows binaries and test captures predate
+these changes. CI must pass before publishing the updated package.

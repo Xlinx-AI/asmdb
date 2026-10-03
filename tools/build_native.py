@@ -51,6 +51,8 @@ def build_nasm():
     if not nasm or not cc:
         return False
     BUILD.mkdir(exist_ok=True)
+    system = platform.system()
+    output_format = {"Windows": "win64", "Linux": "elf64", "Darwin": "macho64"}[system]
     for v in VARIANTS:
         obj = BUILD / f"{v}.o"
         run(
@@ -59,7 +61,7 @@ def build_nasm():
                 "-I",
                 str(ROOT / "native") + "/",
                 "-f",
-                "win64" if os.name == "nt" else "elf64",
+                output_format,
                 "-O2",
                 str(ROOT / "native" / f"{v}.asm"),
                 "-o",
@@ -82,6 +84,20 @@ def build_nasm():
                     str(obj),
                 ]
             )
+        elif system == "Darwin":
+            library = BUILD / f"libasmdb_{v}.dylib"
+            run(
+                [
+                    cc,
+                    "-dynamiclib",
+                    "-arch",
+                    "x86_64",
+                    "-Wl,-install_name,@rpath/" + library.name,
+                    "-o",
+                    str(library),
+                    str(obj),
+                ]
+            )
         else:
             library = BUILD / f"libasmdb_{v}.so"
             run([cc, "-shared", "-Wl,-z,noexecstack", "-o", str(library), str(obj)])
@@ -91,7 +107,7 @@ def build_nasm():
     (BUILD / "CURRENT_BUILD.txt").write_text(
         f"NASM: {nasm}\nPlatform: {platform.platform()}\n"
     )
-    if os.name != "nt" and os.environ.get("ASMDB_BUILD_X86") == "1":
+    if system == "Linux" and os.environ.get("ASMDB_BUILD_X86") == "1":
         obj = BUILD / "x86.o"
         run(
             [
@@ -136,19 +152,53 @@ def build_bootstrap():
     )
 
 
+def build_arm64():
+    cc = find_linker()
+    if not cc:
+        raise SystemExit("ARM64 assembly requires Clang or GCC")
+    BUILD.mkdir(exist_ok=True)
+    destination = ROOT / "asmdb/_native"
+    destination.mkdir(exist_ok=True)
+    macos = platform.system() == "Darwin"
+    for name, source in [("arm64_neon", "arm64.S"), ("opencl", "opencl_arm64.S")]:
+        extension = ".dylib" if macos else ".so"
+        library = BUILD / f"libasmdb_{name}{extension}"
+        flags = (
+            [
+                "-dynamiclib",
+                "-arch",
+                "arm64",
+                "-Wl,-install_name,@rpath/" + library.name,
+            ]
+            if macos
+            else ["-shared", "-fPIC", "-Wl,-z,noexecstack"]
+        )
+        run([cc, *flags, "-o", str(library), str(ROOT / "native" / source)])
+        shutil.copy2(library, destination / library.name)
+    (BUILD / "CURRENT_BUILD.txt").write_text(
+        f"assembler={cc}\nplatform={platform.platform()}\n", encoding="utf-8"
+    )
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--bootstrap-if-needed", action="store_true")
+    args = parser.parse_args()
+    system = platform.system()
+    machine = platform.machine().lower()
+    if system not in {"Windows", "Linux", "Darwin"}:
+        raise SystemExit(f"Unsupported operating system: {system}")
+    if machine in {"arm64", "aarch64"} and system in {"Linux", "Darwin"}:
+        build_arm64()
+    elif machine in {"amd64", "x86_64"}:
+        if not build_nasm():
+            if args.bootstrap_if_needed and system == "Linux":
+                build_bootstrap()
+            else:
+                raise SystemExit("Native builds require NASM and a platform linker")
+    else:
+        raise SystemExit(f"Unsupported native architecture: {machine}")
+
+
 if __name__ == "__main__":
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--bootstrap-if-needed", action="store_true")
-    args = ap.parse_args()
-    if platform.system() not in {
-        "Linux",
-        "Windows",
-    } or platform.machine().lower() not in ("x86_64", "amd64"):
-        raise SystemExit("This builder requires Windows or Linux x86-64")
-    if not build_nasm():
-        if args.bootstrap_if_needed and os.name != "nt":
-            build_bootstrap()
-        else:
-            raise SystemExit(
-                "nasm not found (use --bootstrap-if-needed for benchmark-only GAS mirror path)"
-            )
+    main()

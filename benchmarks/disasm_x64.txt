@@ -1,0 +1,6 @@
+00000000000010f9 <asmdb_scores>:
+    10f9:	48 85 d2             	test   rdx,rdx
+    10fc:	74 38                	je     1136 <.done>
+    10fe:	49 89 f9             	mov    r9,rdi
+    1101:	45 31 d2             	xor    r10d,r10d
+

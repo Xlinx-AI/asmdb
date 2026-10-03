@@ -1,0 +1,7 @@
+test_native_scores (test_asmdb.TestASMDB.test_native_scores) ... ok
+test_search_and_dsl (test_asmdb.TestASMDB.test_search_and_dsl) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.028s
+
+OK

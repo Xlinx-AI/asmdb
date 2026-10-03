@@ -1,0 +1,14 @@
+test_native_scores (test_asmdb.TestASMDB.test_native_scores) ... ok
+test_search_and_dsl (test_asmdb.TestASMDB.test_search_and_dsl) ... ok
+test_concurrent_search (test_release.ReleaseTests.test_concurrent_search) ... ok
+test_gpu (test_release.ReleaseTests.test_gpu) ... ok
+test_ids_and_large_norms (test_release.ReleaseTests.test_ids_and_large_norms) ... ok
+test_invalid_vectors (test_release.ReleaseTests.test_invalid_vectors) ... ok
+test_native_tails (test_release.ReleaseTests.test_native_tails) ... ok
+test_storage_and_lifecycle (test_release.ReleaseTests.test_storage_and_lifecycle) ... ok
+test_unsafe_backend (test_release.ReleaseTests.test_unsafe_backend) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 3.647s
+
+OK

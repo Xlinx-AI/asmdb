@@ -1,0 +1,16 @@
+test_native_scores (test_asmdb.TestASMDB.test_native_scores) ... ok
+test_search_and_dsl (test_asmdb.TestASMDB.test_search_and_dsl) ... ok
+test_concurrent_search (test_release.ReleaseTests.test_concurrent_search) ... ok
+test_gpu (test_release.ReleaseTests.test_gpu) ... ok
+test_ids_and_large_norms (test_release.ReleaseTests.test_ids_and_large_norms) ... ok
+test_invalid_vectors (test_release.ReleaseTests.test_invalid_vectors) ... ok
+test_native_tails (test_release.ReleaseTests.test_native_tails) ... ok
+test_storage_and_lifecycle (test_release.ReleaseTests.test_storage_and_lifecycle) ... ok
+test_unsafe_backend (test_release.ReleaseTests.test_unsafe_backend) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 2.921s
+
+OK
+C:\Users\User\Downloads\ASMDB_0.1.0\asmdb\build\wheel-final-1.0.0\asmdb\__init__.py
+BackendInfo(name='x64_avx1_sse3', library='C:\\Users\\User\\Downloads\\ASMDB_0.1.0\\asmdb\\build\\wheel-final-1.0.0\\asmdb\\_native\\libasmdb_x64_avx1_sse3.dll', native=True, reason='SIMD assembly backend selected by safe ISA filter + startup micro-autotune: x64_avx1_sse3=184.7us, x64=728.1us')

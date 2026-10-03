@@ -1,0 +1,57 @@
+{
+  "system": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "cpu_count": 5,
+    "backend": {
+      "name": "x64_avx2_sse4",
+      "library": "/mnt/data/asmdb/build/libasmdb_x64_avx2_sse4.so",
+      "native": true,
+      "reason": "SIMD assembly backend selected by safe ISA filter + startup micro-autotune: x64_avx2_sse4=62.8us, x64_avx1_sse3=66.0us, x64_avx512_sse41=73.3us, x64=573.0us"
+    }
+  },
+  "dataset": {
+    "kind": "clustered_rag_synthetic",
+    "n": 50000,
+    "dim": 128,
+    "topics": 64,
+    "queries": 100,
+    "k": 10
+  },
+  "build": {
+    "seconds": 0.2844690059999948
+  },
+  "asmdb": {
+    "mean_ms": 0.17934997,
+    "median_ms": 0.175425,
+    "p95_ms": 0.21317689999999997,
+    "qps_from_mean": 5575.6909242861875,
+    "nprobe": 4,
+    "mean_recall_at_k": 0.966,
+    "candidate_fraction_estimate": 0.0625
+  },
+  "numpy_bruteforce": {
+    "mean_ms": 0.60278047,
+    "median_ms": 0.593117,
+    "p95_ms": 0.81433045,
+    "qps_from_mean": 1658.9787655197256
+  },
+  "asmdb_exact_all_clusters": {
+    "mean_ms": 2.1220032,
+    "median_ms": 2.0946075,
+    "p95_ms": 2.4371243499999995,
+    "qps_from_mean": 471.2528237469199
+  },
+  "sqlite_blob_udf_fullscan": {
+    "mean_ms": 74.2780404,
+    "median_ms": 74.927527,
+    "p95_ms": 77.0972582,
+    "qps_from_mean": 13.462929213194483,
+    "queries_measured": 5
+  },
+  "speedups": {
+    "vs_numpy_mean": 3.3609175959159625,
+    "vs_sqlite_mean": 414.1513957320428
+  }
+}

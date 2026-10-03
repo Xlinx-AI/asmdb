@@ -1,0 +1,57 @@
+{
+  "system": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.13.12",
+    "numpy": "2.4.3",
+    "cpu_count": 12,
+    "backend": {
+      "name": "x64_avx1_sse3",
+      "library": "C:\\Users\\User\\Downloads\\ASMDB_0.1.0\\asmdb\\asmdb\\_native\\libasmdb_x64_avx1_sse3.dll",
+      "native": true,
+      "reason": "SIMD assembly backend selected by safe ISA filter + startup micro-autotune: x64_avx1_sse3=185.0us, x64=749.0us"
+    }
+  },
+  "dataset": {
+    "kind": "clustered_rag_synthetic",
+    "n": 50000,
+    "dim": 128,
+    "topics": 64,
+    "queries": 50,
+    "k": 10
+  },
+  "build": {
+    "seconds": 1.4667938999773469
+  },
+  "asmdb": {
+    "mean_ms": 0.700542,
+    "median_ms": 0.7021999999999999,
+    "p95_ms": 0.75103,
+    "qps_from_mean": 1427.4661619146318,
+    "nprobe": 4,
+    "mean_recall_at_k": 0.978,
+    "candidate_fraction_estimate": 0.0625
+  },
+  "numpy_bruteforce": {
+    "mean_ms": 1.70776,
+    "median_ms": 1.71665,
+    "p95_ms": 1.8843599999999998,
+    "qps_from_mean": 585.5623741040896
+  },
+  "asmdb_exact_all_clusters": {
+    "mean_ms": 9.11405,
+    "median_ms": 9.161850000000001,
+    "p95_ms": 9.259605,
+    "qps_from_mean": 109.72070594302203
+  },
+  "sqlite_blob_udf_fullscan": {
+    "mean_ms": 315.53922,
+    "median_ms": 315.083,
+    "p95_ms": 318.10841999999997,
+    "qps_from_mean": 3.16917814527145,
+    "queries_measured": 5
+  },
+  "speedups": {
+    "vs_numpy_mean": 2.4377696126713317,
+    "vs_sqlite_mean": 450.4215593069366
+  }
+}

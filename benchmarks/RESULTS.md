@@ -1,0 +1,17 @@
+# ASMDB benchmark result
+
+Dataset: **50,000 x 128 float32**, 64 synthetic semantic topics, 100 queries, top-10.
+
+Native backend selected: **x64_avx2_sse4**. Native loaded: `True`.
+
+| Engine | Mean latency | p95 | Approx. QPS | Recall@10 |
+|---|---:|---:|---:|---:|
+| ASMDB nprobe=4 | 0.1793 ms | 0.2132 ms | 5575.7 | 0.966 |
+| NumPy brute-force | 0.6028 ms | 0.8143 ms | 1659.0 | 1.000 |
+| SQLite BLOB+UDF full scan | 74.2780 ms | 77.0973 ms | 13.5 | 1.000 |
+
+Mean latency speedup: **3.36x vs NumPy full scan**, **414.2x vs SQLite full scan**.
+
+ASMDB's speed comes primarily from coarse semantic routing + cluster-contiguous layout (estimated scan fraction 6.250%), then SIMD exact scoring inside selected postings. This is an ANN trade-off, so speedup must be read together with recall.
+
+Exact all-cluster ASMDB mean latency: 2.1220 ms. This is included to separate the indexing win from raw SIMD-kernel speed.

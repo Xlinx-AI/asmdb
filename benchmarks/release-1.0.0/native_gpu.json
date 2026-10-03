@@ -1,0 +1,87 @@
+{
+  "platform": "Windows-10-10.0.19045-SP0",
+  "python": "3.13.12 (tags/v3.13.12:1cbe481, Feb  3 2026, 18:22:25) [MSC v.1944 64 bit (AMD64)]",
+  "numpy": "2.4.3",
+  "selected": {
+    "name": "x64_avx1_sse3",
+    "library": "C:\\Users\\User\\Downloads\\ASMDB_0.1.0\\asmdb\\asmdb\\_native\\libasmdb_x64_avx1_sse3.dll",
+    "native": true,
+    "reason": "SIMD assembly backend selected by safe ISA filter + startup micro-autotune: x64_avx1_sse3=192.1us, x64=734.6us"
+  },
+  "iterations": 100,
+  "dim": 128,
+  "results": [
+    {
+      "backend": "x64_avx1_sse3",
+      "rows": 4096,
+      "max_abs_error": 2.384185791015625e-06,
+      "median_ms": 0.0961,
+      "p95_ms": 0.0992
+    },
+    {
+      "backend": "x64",
+      "rows": 4096,
+      "max_abs_error": 1.52587890625e-05,
+      "median_ms": 0.36895,
+      "p95_ms": 0.37457
+    },
+    {
+      "backend": "numpy",
+      "rows": 4096,
+      "median_ms": 0.1321,
+      "p95_ms": 0.13611
+    },
+    {
+      "backend": "opencl_nasm",
+      "device": "NVIDIA P104-100",
+      "capability": "6.1",
+      "pci_bus": 1,
+      "rows": 4096,
+      "max_abs_error": 3.814697265625e-06,
+      "upload_each_call": {
+        "median_ms": 3.51515,
+        "p95_ms": 3.59967
+      },
+      "resident_matrix": {
+        "median_ms": 0.4922,
+        "p95_ms": 0.5047
+      }
+    },
+    {
+      "backend": "x64_avx1_sse3",
+      "rows": 50000,
+      "max_abs_error": 3.814697265625e-06,
+      "median_ms": 2.1224499999999997,
+      "p95_ms": 2.3583000000000003
+    },
+    {
+      "backend": "x64",
+      "rows": 50000,
+      "max_abs_error": 2.288818359375e-05,
+      "median_ms": 5.045999999999999,
+      "p95_ms": 5.213815
+    },
+    {
+      "backend": "numpy",
+      "rows": 50000,
+      "median_ms": 1.3445,
+      "p95_ms": 1.517105
+    },
+    {
+      "backend": "opencl_nasm",
+      "device": "NVIDIA P104-100",
+      "capability": "6.1",
+      "pci_bus": 1,
+      "rows": 50000,
+      "max_abs_error": 7.62939453125e-06,
+      "upload_each_call": {
+        "median_ms": 42.156800000000004,
+        "p95_ms": 42.574325
+      },
+      "resident_matrix": {
+        "median_ms": 3.01375,
+        "p95_ms": 3.0622000000000003
+      }
+    }
+  ]
+}

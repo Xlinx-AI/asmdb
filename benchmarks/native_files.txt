@@ -1,0 +1,4 @@
+build/libasmdb_x64.so:              ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, BuildID[sha1]=360deed68bb7509e2e9cf0705dd025e2db200cad, not stripped
+build/libasmdb_x64_avx1_sse3.so:    ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, BuildID[sha1]=22bf5ea16e7ef6a3c9ded1ec7c5243b1e8d7a427, not stripped
+build/libasmdb_x64_avx2_sse4.so:    ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, BuildID[sha1]=41a1c33295b3da5952cfe1c31b026fb4d12a58f4, not stripped
+build/libasmdb_x64_avx512_sse41.so: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, BuildID[sha1]=bf4873a721c1cfb6f712b124144a4827d8445722, not stripped

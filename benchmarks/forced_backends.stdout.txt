@@ -1,0 +1,4 @@
+x64 x64 max_abs_error= 5.7220458984375e-06
+x64_avx1_sse3 x64_avx1_sse3 max_abs_error= 1.9073486328125e-06
+x64_avx2_sse4 x64_avx2_sse4 max_abs_error= 2.86102294921875e-06
+x64_avx512_sse41 x64_avx512_sse41 max_abs_error= 3.814697265625e-06
